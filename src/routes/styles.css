@@ -1,38 +1,45 @@
 /* @import '@fontsource/fira-mono'; */
 
 @tailwind base;
-@tailwind components;
-@tailwind utilities;
 
+/* Firefox */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: hsl(var(--p) / var(--tw-text-opacity)) hsl(var(--b1) / var(--tw-bg-opacity));
+}
 
-@layer utilities {
-    .scrollbar::-webkit-scrollbar {
-        width: 8px;
-        height: 8px;
-    }
+/* https://scottspence.com/posts/change-scrollbar-color-tailwind-css */
+/* https://daisyui.com/docs/colors/ */
 
-    .scrollbar:hover::-webkit-scrollbar {
-        width: 14px;
-        height: 14px;
-    }
+*::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
 
-    .scrollbar::-webkit-scrollbar-track {
-        border-radius: 100vh;
-        background: hsl(var(--pc) / var(--tw-text-opacity));
-    }
+*:hover::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+}
 
-    .scrollbar::-webkit-scrollbar-thumb {
-        background: hsl(var(--p) / var(--tw-bg-opacity));
+*::-webkit-scrollbar-track {
+    border-radius: 100vh;
+    background: hsl(var(--b1) / var(--tw-text-opacity));
+}
 
-        border-radius: 100vh;
-        border: 3px solid hsl(var(--pc) / var(--tw-text-opacity));
-    }
+*::-webkit-scrollbar-thumb {
+    background: hsl(var(--p) / var(--tw-bg-opacity));
 
-    /* 
+    border-radius: 100vh;
+    border: 3px solid hsl(var(--b1) / var(--tw-text-opacity));
+}
+
+/* 
     .scrollbar::-webkit-scrollbar-thumb:hover {
         background: var(primary);
     } */
-}
+
+@tailwind components;
+@tailwind utilities;
 
 body {
     min-height: 100vh !important;

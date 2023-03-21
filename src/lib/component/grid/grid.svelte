@@ -1,4 +1,5 @@
 <script>
+	let a = 3;
 </script>
 
 <div class="overflow-x-auto">
