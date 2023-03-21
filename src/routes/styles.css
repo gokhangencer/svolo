@@ -4,21 +4,16 @@
 @tailwind components;
 @tailwind utilities;
 
-/* 
-:root {
-    --primary: theme(colors.slate.900);
-    --secondary: theme(colors.slate.100);
-  }
-   */
+
 @layer utilities {
     .scrollbar::-webkit-scrollbar {
-        width: 12px;
-        height: 12px;
+        width: 8px;
+        height: 8px;
     }
 
-    .scrollbar::-webkit-scrollbar:hover {
-        width: 16px;
-        height: 16px;
+    .scrollbar:hover::-webkit-scrollbar {
+        width: 14px;
+        height: 14px;
     }
 
     .scrollbar::-webkit-scrollbar-track {
@@ -33,9 +28,10 @@
         border: 3px solid hsl(var(--pc) / var(--tw-text-opacity));
     }
 
+    /* 
     .scrollbar::-webkit-scrollbar-thumb:hover {
         background: var(primary);
-    }
+    } */
 }
 
 body {

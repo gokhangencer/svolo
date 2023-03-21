@@ -106,7 +106,7 @@
 			</div>
 		</div>
 		<slot />
-		<footer class="sticky top-[100vh] footer footer-center p-5 bg-primary text-primary-content">
+		<footer class="sticky top-[100vh] footer footer-center p-5 bg-primary text-primary">
 			<div>
 				<svg
 					width="50"
@@ -158,7 +158,7 @@
 		<ul class="menu p-4 w-80 bg-base-100 text-base-content">
 			<!-- Sidebar content here -->
 			<div class="flex flex-col h-[calc(100vh-50px)]">
-				<div class=""><button class="btn btn-ghost normal-case text-xl">Svolo</button></div>
+				<div class=""><button class="btn btn-ghost normal-case text-xl w-full">Svolo</button></div>
 				<div class="flex-1 overflow-auto scroll-smooth scrollbar">
 					{#each Array(50) as _, i}
 						<li>
