@@ -1,7 +1,8 @@
 <script>
 	import './styles.css';
 
-	let theme = 'light';
+	let theme = 'light',
+		sidebarSelected = 0;
 </script>
 
 <div class="drawer" data-theme={theme}>
@@ -137,7 +138,9 @@
 				<div class=""><button class="btn btn-ghost normal-case text-xl">Svolo</button></div>
 				<div class="flex-1 overflow-auto scroll-smooth">
 					{#each Array(50) as _, i}
-						<li><a href="#top">Sidebar Item {i + 1}</a></li>
+						<li>
+							<a href="#top" class:active={sidebarSelected == i + 1} on:click={() => (sidebarSelected = i + 1)}>Sidebar Item {i + 1}</a>
+						</li>
 					{/each}
 				</div>
 			</div>
