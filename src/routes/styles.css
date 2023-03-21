@@ -4,10 +4,38 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Firefox */
-* {
-    scrollbar-width: thin;
-    scrollbar-color: var(--secondary) var(--primary);
+/* 
+:root {
+    --primary: theme(colors.slate.900);
+    --secondary: theme(colors.slate.100);
+  }
+   */
+@layer utilities {
+    .scrollbar::-webkit-scrollbar {
+        width: 12px;
+        height: 12px;
+    }
+
+    .scrollbar::-webkit-scrollbar:hover {
+        width: 16px;
+        height: 16px;
+    }
+
+    .scrollbar::-webkit-scrollbar-track {
+        border-radius: 100vh;
+        background: hsl(var(--pc) / var(--tw-text-opacity));
+    }
+
+    .scrollbar::-webkit-scrollbar-thumb {
+        background: hsl(var(--p) / var(--tw-bg-opacity));
+
+        border-radius: 100vh;
+        border: 3px solid hsl(var(--pc) / var(--tw-text-opacity));
+    }
+
+    .scrollbar::-webkit-scrollbar-thumb:hover {
+        background: var(primary);
+    }
 }
 
 body {

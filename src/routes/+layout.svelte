@@ -14,7 +14,11 @@
 		<div class="navbar bg-base-100">
 			<div class="navbar-start">
 				<label for="my-drawer" class="btn btn-primary btn-ghost drawer-button">
-					<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="inline-block w-5 h-5 stroke-current"
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						fill="none"
+						viewBox="0 0 24 24"
+						class="inline-block w-5 h-5 stroke-current"
 						><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" /></svg
 					>
 				</label>
@@ -25,12 +29,22 @@
 			<div class="navbar-end">
 				<button class="btn btn-ghost btn-circle">
 					<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"
-						><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg
+						><path
+							stroke-linecap="round"
+							stroke-linejoin="round"
+							stroke-width="2"
+							d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+						/></svg
 					>
 				</button>
 				<div class="dropdown dropdown-end inline-block">
 					<label for="" tabindex="-1" class="btn btn-ghost btn-circle">
-						<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+						<svg
+							xmlns="http://www.w3.org/2000/svg"
+							class="h-5 w-5"
+							fill="none"
+							viewBox="0 0 24 24"
+							stroke="currentColor"
 							><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7" /></svg
 						>
 					</label>
@@ -42,7 +56,12 @@
 				</div>
 				<button class="btn btn-ghost btn-circle">
 					<div class="indicator">
-						<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+						<svg
+							xmlns="http://www.w3.org/2000/svg"
+							class="h-5 w-5"
+							fill="none"
+							viewBox="0 0 24 24"
+							stroke="currentColor"
 							><path
 								stroke-linecap="round"
 								stroke-linejoin="round"
@@ -54,7 +73,11 @@
 					</div>
 				</button>
 				<button class="btn btn-square btn-ghost">
-					<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="inline-block w-5 h-5 stroke-current"
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						fill="none"
+						viewBox="0 0 24 24"
+						class="inline-block w-5 h-5 stroke-current"
 						><path
 							stroke-linecap="round"
 							stroke-linejoin="round"
@@ -136,10 +159,12 @@
 			<!-- Sidebar content here -->
 			<div class="flex flex-col h-[calc(100vh-50px)]">
 				<div class=""><button class="btn btn-ghost normal-case text-xl">Svolo</button></div>
-				<div class="flex-1 overflow-auto scroll-smooth">
+				<div class="flex-1 overflow-auto scroll-smooth scrollbar">
 					{#each Array(50) as _, i}
 						<li>
-							<a href="#top" class:active={sidebarSelected == i + 1} on:click={() => (sidebarSelected = i + 1)}>Sidebar Item {i + 1}</a>
+							<a href="#top" class:active={sidebarSelected == i} on:click={() => (sidebarSelected = i)}
+								>Sidebar Item {i + 1}
+							</a>
 						</li>
 					{/each}
 				</div>
