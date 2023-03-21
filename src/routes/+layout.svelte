@@ -1,8 +1,12 @@
 <script>
+	import Confirm from '$lib/images/component/confirm.svelte';
+	import Login from '$lib/images/component/login.svelte';
 	import './styles.css';
 
-	let theme = 'light',
-		sidebarSelected = 0;
+	let theme = 'retro',
+		sidebarSelected = 0,
+		confirmOpenned = false,
+		loginOpenned = true;
 </script>
 
 <div class="drawer" data-theme={theme}>
@@ -24,10 +28,10 @@
 				</label>
 			</div>
 			<div class="navbar-center">
-				<button class="btn btn-ghost normal-case text-xl">Svolo</button>
+				<a href="/" class="btn btn-ghost normal-case text-xl">Svolo</a>
 			</div>
 			<div class="navbar-end">
-				<button class="btn btn-ghost btn-circle">
+				<button class="btn btn-ghost btn-circle hidden sm:inline-flex">
 					<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"
 						><path
 							stroke-linecap="round"
@@ -72,7 +76,7 @@
 						<span class="badge badge-xs badge-primary indicator-item" />
 					</div>
 				</button>
-				<button class="btn btn-square btn-ghost">
+				<button class="btn btn-square btn-ghost" on:click={() => (confirmOpenned = true)}>
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
 						fill="none"
@@ -100,7 +104,7 @@
 							</a>
 						</li>
 						<li><a href={'#'}>Settings</a></li>
-						<li><a href={'#'}>Logout</a></li>
+						<li><a href={'#'} on:click={() => (loginOpenned = true)}>Logout</a></li>
 					</ul>
 				</div>
 			</div>
@@ -151,6 +155,9 @@
 				</div>
 			</div>
 		</footer>
+
+		<Confirm bind:isOpened={confirmOpenned} title={'Are you sure?'} message={'Have you liked?'} />
+		<Login bind:isOpened={loginOpenned} />
 	</div>
 
 	<div class="drawer-side">
@@ -158,8 +165,11 @@
 		<ul class="menu p-4 w-80 bg-base-100 text-base-content">
 			<!-- Sidebar content here -->
 			<div class="flex flex-col h-[calc(100vh-50px)]">
-				<div class=""><button class="btn btn-ghost normal-case text-xl w-full">Svolo</button></div>
+				<div class=""><a href="/" class="btn btn-ghost normal-case text-xl w-full">Svolo</a></div>
 				<div class="flex-1 overflow-auto scroll-smooth scrollbar">
+					<li>
+						<a href="/griddemo">Grid Demo</a>
+					</li>
 					{#each Array(50) as _, i}
 						<li>
 							<a href={'#'} class:active={sidebarSelected == i} on:click={() => (sidebarSelected = i)}
