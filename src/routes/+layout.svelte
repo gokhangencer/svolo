@@ -1,10 +1,10 @@
 <script>
-	import Confirm from '$lib/component/confirm.svelte';
-	import Login from '$lib/component/login.svelte';
+	import ConfirmModal from '$lib/component/confirmModal.svelte';
+	import LoginForm from '$lib/component/loginForm.svelte';
 	import favicon from '$lib/images/favicon.png';
 	import './styles.css';
 
-	let theme = 'retro',
+	let theme = 'dark',
 		sidebarSelected = 0,
 		confirmOpenned = false,
 		loginOpenned = false;
@@ -44,13 +44,23 @@
 				</button>
 				<div class="dropdown dropdown-end inline-block">
 					<label for="" tabindex="-1" class="btn btn-ghost btn-circle">
-						<svg
+						<!-- <svg
 							xmlns="http://www.w3.org/2000/svg"
 							class="h-5 w-5"
 							fill="none"
 							viewBox="0 0 24 24"
 							stroke="currentColor"
 							><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7" /></svg
+						> -->
+						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 48 48"
+							><path
+								fill="none"
+								stroke="currentColor"
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								stroke-width="2"
+								d="M6.966 14.615V6.04a25.131 25.131 0 0 0 11.343 2.768c6.482 0 8.575-3.308 15.799-3.308a22.973 22.973 0 0 1 6.926 1.507v7.608m0 0v11.546c0 3.375-3.916 3.646-7.494 3.646s-6.538 1.508-6.538 4.895c0 1.528 1.001 1.856 1.001 4.22S26.748 42.5 24 42.5s-4.003-1.215-4.003-3.579s1.001-2.69 1.001-4.22c0-3.387-2.96-4.894-6.538-4.894s-7.494-.27-7.494-3.646V14.615m0 0h34.068"
+							/></svg
 						>
 					</label>
 					<ul tabindex="-1" class="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
@@ -99,7 +109,7 @@
 					</label>
 					<ul tabindex="-1" class="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
 						<li>
-							<a href={'#'} class="justify-between">
+							<a href={'https://github.com/gokhangencer/svolo'} target="_blank" class="justify-between">
 								Profile
 								<span class="badge">New</span>
 							</a>
@@ -146,8 +156,8 @@
 			</div>
 		</footer>
 
-		<Confirm bind:isOpened={confirmOpenned} title={'Are you sure?'} message={'Have you liked?'} />
-		<Login bind:isOpened={loginOpenned} />
+		<ConfirmModal bind:isOpened={confirmOpenned} title={'Are you sure?'} message={'Have you liked?'} />
+		<LoginForm bind:isOpened={loginOpenned} />
 	</div>
 
 	<div class="drawer-side">

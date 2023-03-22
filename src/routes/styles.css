@@ -16,10 +16,11 @@
     height: 8px;
 }
 
+/* 
 *:hover::-webkit-scrollbar {
     width: 12px;
     height: 12px;
-}
+} */
 
 *::-webkit-scrollbar-track {
     border-radius: 100vh;
