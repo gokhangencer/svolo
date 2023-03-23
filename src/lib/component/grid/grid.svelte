@@ -4,19 +4,7 @@
 	import { DateFormats, DefaultNumberFormat } from '../../utils/formatUtils';
 	import { FormatField } from './gridUtils';
 
-	export let options: GridOptionsType = {
-		pk: 'Id',
-		columns: [
-			{ displayName: 'SId', field: 'Id', visible: false },
-			{ displayName: 'Name', field: 'Name' },
-			{ displayName: 'Job', field: 'Job', cssClass: 'text-right' },
-			{ displayName: 'Salary', field: 'Salary', numberFormat: DefaultNumberFormat, cssClass: 'text-right' },
-			{ displayName: 'Company', field: 'Company' },
-			{ displayName: 'Country', field: 'Location' },
-			{ displayName: 'Last Login', field: 'LastLogin', dateFormat: DateFormats.DateTime },
-			{ displayName: 'Fav Color', field: 'FavColor', type: 'list' }
-		]
-	};
+	export let options: GridOptionsType;
 
 	export let data: any[];
 
