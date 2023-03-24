@@ -149,6 +149,9 @@
 						<a href="/fields" on:click={() => (drawerOpenned = false)}>Fields </a>
 					</li>
 					<li>
+						<a href="/dnddemo" on:click={() => (drawerOpenned = false)}>DnD Demo </a>
+					</li>
+					<li>
 						<a
 							href={'#'}
 							on:click={() => {
