@@ -13,7 +13,12 @@
 	];
 </script>
 
-<div class="w-full grid grid-cols-1 sm:grid-cols-2">
+<svelte:head>
+	<title>Fields Demo</title>
+	<meta name="description" content="Fields Demo" />
+</svelte:head>
+
+<div class="w-full max-w-3xl mx-auto center grid grid-cols-1 sm:grid-cols-2">
 	<TextField id="name" label="Text" />
 	<NumberField id="age" label="Number" />
 	<DecimalField id="price" label="Decimal" />

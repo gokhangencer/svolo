@@ -143,6 +143,9 @@
 				<div class=""><a href="/" class="btn btn-ghost normal-case text-xl w-full">Svolo</a></div>
 				<div class="flex-1 overflow-auto scroll-smooth">
 					<li>
+						<a href="/openai" on:click={() => (drawerOpenned = false)}>OpenAI</a>
+					</li>
+					<li>
 						<a href="/griddemo" on:click={() => (drawerOpenned = false)}>Grid Demo </a>
 					</li>
 					<li>
@@ -150,6 +153,9 @@
 					</li>
 					<li>
 						<a href="/dnddemo" on:click={() => (drawerOpenned = false)}>DnD Demo </a>
+					</li>
+					<li>
+						<a href="/errordemo" on:click={() => (drawerOpenned = false)}>Error Demo </a>
 					</li>
 					<li>
 						<a

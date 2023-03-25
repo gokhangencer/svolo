@@ -1,5 +1,5 @@
 {
-	"name": "sveltekit-2",
+	"name": "svolo",
 	"version": "0.0.1",
 	"scripts": {
 		"dev": "vite dev",
@@ -15,17 +15,17 @@
 	"devDependencies": {
 		"@fontsource/fira-mono": "^4.5.10",
 		"@neoconfetti/svelte": "^1.0.0",
-		"@playwright/test": "^1.31.2",
-		"@sveltejs/adapter-vercel": "^2.4.0",
-		"@sveltejs/kit": "^1.13.0",
+		"@playwright/test": "^1.32.1",
+		"@sveltejs/adapter-vercel": "^2.4.1",
+		"@sveltejs/kit": "^1.14.0",
 		"@types/cookie": "^0.5.1",
 		"autoprefixer": "^10.4.14",
 		"eslint": "^8.36.0",
 		"eslint-config-prettier": "^8.8.0",
 		"eslint-plugin-svelte3": "^4.0.0",
 		"postcss": "^8.4.21",
-		"prettier": "^2.8.5",
-		"prettier-plugin-svelte": "^2.9.0",
+		"prettier": "^2.8.7",
+		"prettier-plugin-svelte": "^2.10.0",
 		"svelte": "^3.57.0",
 		"svelte-check": "^3.1.4",
 		"tailwindcss": "^3.2.7",
@@ -35,7 +35,9 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"daisyui": "^2.51.4",
-		"openai": "^3.2.1"
+		"daisyui": "^2.51.5",
+		"gpt3-tokenizer": "^1.1.5",
+		"openai": "^3.2.1",
+		"sse.js": "^0.6.1"
 	}
 }
