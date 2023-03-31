@@ -2,19 +2,26 @@
 	import Grid from '$lib/component/grid/grid.svelte';
 	import { data } from '$lib/samples/data';
 	import { DateFormats, DefaultNumberFormat } from '$lib/utils/formatUtils';
+	import { FieldType } from '../../types/GridColumn.type';
 	import type { GridOptionsType } from '../../types/GridOptions.type';
 
 	let gridOptions: GridOptionsType = {
 		pk: 'Id',
 		columns: [
-			{ displayName: 'SId', field: 'Id', visible: false },
-			{ displayName: 'Name', field: 'Name' },
-			{ displayName: 'Job', field: 'Job', cssClass: 'text-right' },
-			{ displayName: 'Salary', field: 'Salary', numberFormat: DefaultNumberFormat, cssClass: 'text-right' },
-			{ displayName: 'Company', field: 'Company' },
-			{ displayName: 'Country', field: 'Location' },
-			{ displayName: 'Last Login', field: 'LastLogin', dateFormat: DateFormats.DateTime },
-			{ displayName: 'Fav Color', field: 'FavColor', type: 'list' }
+			{ displayName: 'SId', field: 'Id', type: FieldType.Number, visible: false },
+			{ displayName: 'Name', field: 'Name', type: FieldType.Text, required: true },
+			{ displayName: 'Job', field: 'Job', type: FieldType.Text, cssClass: 'text-right' },
+			{
+				displayName: 'Salary',
+				field: 'Salary',
+				type: FieldType.Float,
+				numberFormat: DefaultNumberFormat,
+				cssClass: 'text-right'
+			},
+			{ displayName: 'Company', field: 'Company', type: FieldType.Text },
+			{ displayName: 'Country', field: 'Location', type: FieldType.Text },
+			{ displayName: 'Last Login', field: 'LastLogin', type: FieldType.DateTime, dateFormat: DateFormats.DateTime },
+			{ displayName: 'Fav Color', field: 'FavColor', type: FieldType.List }
 		]
 	};
 </script>

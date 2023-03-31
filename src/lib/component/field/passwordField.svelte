@@ -34,7 +34,7 @@
 			{id}
 			name={id}
 			type="password"
-			class="input input-ghost w-full max-w-xs rounded-none peer border-0 border-b-2 border-primary placeholder-transparent 
+			class="input input-ghost input-sm w-full max-w-xs rounded-none peer border-0 border-b-2 border-primary placeholder-transparent
 				   focus:outline-none focus:border-b-primary-focus"
 			bind:value
 			on:blur={blurinput}
@@ -47,7 +47,7 @@
 		{#if label.length > 0}
 			<label
 				for={id}
-				class="absolute left-0 -top-3.5 text-base-content text-sm transition-all 
+				class="absolute left-0 -top-3.5 text-base-content text-sm transition-all
 						peer-placeholder-shown:text-base peer-placeholder-shown:text-base-content peer-placeholder-shown:top-2.5
 						peer-focus:-top-3.5 peer-focus:text-base-content peer-focus:text-opacity-70 peer-focus:text-sm">
 				{label}
