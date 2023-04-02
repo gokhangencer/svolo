@@ -1,6 +1,6 @@
 <script lang="ts">
 	import Grid from '$lib/component/grid/grid.svelte';
-	import { data } from '$lib/samples/data';
+	import { sample_data } from '$lib/samples/data';
 	import { DateFormats, DefaultNumberFormat } from '$lib/utils/formatUtils';
 	import { FieldType } from '../../types/GridColumn.type';
 	import type { GridOptionsType } from '../../types/GridOptions.type';
@@ -24,6 +24,8 @@
 			{ displayName: 'Fav Color', field: 'FavColor', type: FieldType.List }
 		]
 	};
+
+	$: console.log('grid inline demo');
 </script>
 
 <svelte:head>
@@ -31,4 +33,4 @@
 	<meta name="description" content="Grid Demo" />
 </svelte:head>
 
-<Grid {data} options={gridOptions} />
+<Grid data={sample_data} options={gridOptions} />

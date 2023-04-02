@@ -1,5 +1,6 @@
 <script lang="ts">
 	import ChatMessage from '$lib/component/ChatMessage.svelte';
+	import type { User } from 'firebase/auth';
 	import type { ChatCompletionRequestMessage } from 'openai';
 	import { SSE } from 'sse.js';
 
@@ -8,6 +9,8 @@
 	let loading: boolean = false;
 	let chatMessages: ChatCompletionRequestMessage[] = [];
 	let scrollToDiv: HTMLDivElement;
+
+	let luser: User | undefined;
 
 	function scrollToBottom() {
 		setTimeout(function () {

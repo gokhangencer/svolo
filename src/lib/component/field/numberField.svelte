@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { createEventDispatcher, onMount } from 'svelte';
+	import { element } from 'svelte/internal';
 
 	export let id: string = 'inputEl',
 		value: number | undefined = undefined,
@@ -9,7 +10,9 @@
 		max = 99999999,
 		min = 0,
 		disabled: boolean = false,
-		step: number | string | undefined = undefined;
+		step: number | string | undefined = undefined,
+		inline: boolean = false,
+		isvalid: boolean = true;
 
 	let inputElement: HTMLInputElement;
 
@@ -19,16 +22,56 @@
 
 	onMount(() => {
 		original = value;
+		inputElement.focus();
 	});
 
-	function blurinput() {
+	function blurinput(ev: Event) {
 		if (!inputElement.checkValidity()) {
+			isvalid = false;
+			ev.preventDefault();
+			ev.stopImmediatePropagation();
+			inputElement.focus();
+			inputElement.reportValidity();
+		} else {
+			isvalid = true;
+		}
+	}
+
+	function handleKeydown(ev: KeyboardEvent) {
+		if (ev.key === 'Escape') {
+			value = original;
+		} else if (ev.key === 'Tab' || ev.key === 'ArrowUp' || ev.key === 'ArrowDown') {
+			if (!inputElement.checkValidity()) {
+				isvalid = false;
+				ev.preventDefault();
+				ev.stopImmediatePropagation();
+				inputElement.focus();
+				inputElement.reportValidity();
+			}
+		} else {
+			if (!inputElement.checkValidity()) {
+				isvalid = false;
+				inputElement.reportValidity();
+			} else {
+				isvalid = true;
+			}
+		}
+	}
+
+	function handleClick(ev: MouseEvent) {
+		if (!inputElement.checkValidity()) {
+			isvalid = false;
+			ev.preventDefault();
+			ev.stopImmediatePropagation();
+			inputElement.focus();
 			inputElement.reportValidity();
 		}
 	}
+
+	let containerClass = inline ? 'm-0 p-0' : 'mb-8 px-10';
 </script>
 
-<div class="mb-8 px-10">
+<div class={containerClass}>
 	<div class="relative">
 		<input
 			bind:this={inputElement}
@@ -38,6 +81,8 @@
 			class="input input-ghost input-sm w-full max-w-xs rounded-none peer border-0 border-b-2 border-primary placeholder-transparent
                    focus:outline-none focus:border-b-primary-focus"
 			bind:value
+			on:keydown={handleKeydown}
+			on:mousedown={handleClick}
 			on:blur={blurinput}
 			{placeholder}
 			{required}

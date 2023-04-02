@@ -1,13 +1,24 @@
-<script>
+<script lang="ts">
 	import ConfirmModal from '$lib/component/confirmModal.svelte';
+	import { page } from '$app/stores';
 	import LoginForm from '$lib/component/loginForm.svelte';
 	import favicon from '$lib/images/favicon.png';
+	import { authStore } from '$lib/stores/authStore';
+	import type { User } from 'firebase/auth';
+	import { onMount } from 'svelte';
 	import './styles.css';
 
 	let theme = 'retro',
 		confirmOpenned = false,
 		loginOpenned = false,
 		drawerOpenned = false;
+
+	let luser: User | undefined, loginForm: LoginForm;
+
+	onMount(() => {});
+
+	$: loginOpenned = $page.data.protected && !$authStore.isLoggedIn;
+	$: luser = $authStore.user;
 </script>
 
 <div class="drawer" data-theme={theme}>
@@ -85,7 +96,7 @@
 				<div class="dropdown dropdown-end inline-block">
 					<label for="" tabindex="-1" class="btn btn-ghost btn-circle avatar">
 						<div class="w-10 rounded-full">
-							<img alt="" src="https://avatars.githubusercontent.com/u/5635828?s=40&v=4" />
+							<img alt="profile" src={luser?.photoURL ?? favicon} referrerpolicy="no-referrer" />
 						</div>
 					</label>
 					<ul tabindex="-1" class="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
@@ -96,13 +107,19 @@
 							</a>
 						</li>
 						<li><a href={'#'}>Settings</a></li>
-						<li><a href={'#'} on:click={() => (loginOpenned = true)}>Logout</a></li>
+						<li>
+							<a
+								href={'#'}
+								on:click={() => {
+									loginForm.signOut();
+								}}>Logout</a>
+						</li>
 					</ul>
 				</div>
 			</div>
 		</div>
 		<slot />
-		<footer class="sticky top-[100vh] footer footer-center p-5 bg-primary text-primary-content ">
+		<footer class="sticky top-[100vh] footer footer-center p-5 bg-primary text-primary-content">
 			<div>
 				<img src={favicon} class="w-12 h-12" alt="" />
 				<p class="font-bold">
@@ -132,7 +149,7 @@
 		</footer>
 
 		<ConfirmModal bind:isOpened={confirmOpenned} title={'Are you sure?'} message={'Have you liked?'} />
-		<LoginForm bind:isOpened={loginOpenned} />
+		<LoginForm bind:this={loginForm} bind:isOpened={loginOpenned} />
 	</div>
 
 	<div class="drawer-side">
@@ -146,7 +163,7 @@
 						<a href="/openai" on:click={() => (drawerOpenned = false)}>OpenAI</a>
 					</li>
 					<li>
-						<a href="/griddemo" on:click={() => (drawerOpenned = false)}>Grid Demo </a>
+						<a href="/griddemo" on:click={() => (drawerOpenned = false)}>Grid Inline </a>
 					</li>
 					<li>
 						<a href="/fields" on:click={() => (drawerOpenned = false)}>Fields </a>

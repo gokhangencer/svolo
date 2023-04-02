@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { createEventDispatcher, onMount } from 'svelte';
-	import { escape } from 'svelte/internal';
 
 	export let id: string = 'inputEl',
 		value: string = '',
@@ -89,6 +88,7 @@
 			{maxlength}
 			{pattern}
 			{disabled} />
+
 		{#if label.length > 0}
 			<label
 				for={id}

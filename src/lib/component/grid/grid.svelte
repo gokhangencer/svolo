@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { FieldType, type GridColumnType } from '../../../types/GridColumn.type';
 	import type { GridOptionsType } from '../../../types/GridOptions.type';
+	import DecimalField from '../field/decimalField.svelte';
 	import NumberField from '../field/numberField.svelte';
 	import TextField from '../field/textField.svelte';
 	import { FormatField } from './gridUtils';
@@ -127,7 +128,6 @@
 		let relatedEl = ev.target as HTMLElement;
 
 		if (relatedEl?.tagName === 'TD') {
-			console.log(isvalid, 'sss');
 			lastRowIndex = (relatedEl.closest('tr') as HTMLTableRowElement).rowIndex;
 			lastColIndex = (relatedEl as HTMLTableCellElement).cellIndex;
 			return;
@@ -180,8 +180,8 @@
 	}
 
 	$: visibleColumns = options.columns.filter((f) => f.visible !== false);
-	$: console.log('lastRowIndex:', lastRowIndex);
-	$: console.log('lastColIndex:', lastColIndex);
+	// $: console.log('lastRowIndex:', lastRowIndex);
+	// $: console.log('lastColIndex:', lastColIndex);
 </script>
 
 <svelte:window on:keydown={handleTrackShift} on:keyup={handleTrackShift} />
@@ -210,13 +210,21 @@
 					{#each visibleColumns as column, colindex}
 						<td class="p-0 {column.cssClass}" tabindex="-1">
 							{#if editing && rowindex + 1 === lastRowIndex && colindex + 1 === lastColIndex}
-								{#if column.type === FieldType.Text}
-									<div class="w-full p-0 m-0">
+								<div class="w-full p-0 m-0">
+									{#if column.type === FieldType.Text}
 										<TextField inline={true} bind:value={row[column.field]} required={column.required} bind:isvalid />
-									</div>
-								{:else}
-									{FormatField(row, column)}
-								{/if}
+									{:else if column.type === FieldType.Float}
+										<DecimalField
+											inline={true}
+											bind:value={row[column.field]}
+											required={column.required}
+											bind:isvalid />
+									{:else if column.type === FieldType.Number}
+										<NumberField inline={true} bind:value={row[column.field]} required={column.required} bind:isvalid />
+									{:else}
+										{FormatField(row, column)}
+									{/if}
+								</div>
 							{:else}
 								{FormatField(row, column)}
 							{/if}
