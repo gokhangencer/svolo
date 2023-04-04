@@ -17,7 +17,9 @@
 
 	onMount(() => {});
 
-	$: loginOpenned = $page.data.protected && !$authStore.isLoggedIn;
+	$: if ($page.data.protected && !$authStore.isLoggedIn) {
+		loginOpenned = true;
+	}
 	$: luser = $authStore.user;
 </script>
 
