@@ -25,14 +25,14 @@
 		{ id: uuidv4(), testName: 'MCHC (Hb/Hk)', result: 33.1, unit: 'g/dl', refs: '31.5 - 36.0' },
 		{ id: uuidv4(), testName: 'Thrombozyten', result: 236, unit: '1000/µl', refs: '150 - 370' },
 		{ id: uuidv4(), testName: 'RDW-CV: Ery-Volumenverteilungsbr.', result: 14.3, unit: '%', refs: ' 9.0 - 17.0' },
-		{ id: uuidv4(), testName: 'Differentialblutbild (automat.)', result: 0, unit: '', refs: '' },
+		{ id: uuidv4(), testName: '  Differentialblutbild (automat.)', result: 0, unit: '', refs: '' },
 		{ id: uuidv4(), testName: 'Neutrophile Granulozyten', result: 49.2, unit: '%', refs: '42.0 - 77.0' },
 		{ id: uuidv4(), testName: 'Lymphozyten', result: 41.1, unit: '%', refs: '20.0 - 44.0' },
 		{ id: uuidv4(), testName: 'Monozyten', result: 7.6, unit: '%', refs: '2.0 - 9.5' },
 		{ id: uuidv4(), testName: 'Eosinophile Granulozyten', result: 1.5, unit: '%', refs: '0.5 - 5.5' },
 		{ id: uuidv4(), testName: 'Basophile Granulozyten', result: 0.6, unit: '%', refs: '< 1.8' },
 		{ id: uuidv4(), testName: 'unreife Granulozyten', result: 0.3, unit: '%', refs: '< 0.6' },
-		{ id: uuidv4(), testName: 'Differentialblutbild (absolut)', result: 0, unit: '', refs: '' },
+		{ id: uuidv4(), testName: '  Differentialblutbild (absolut)', result: 0, unit: '', refs: '' },
 		{ id: uuidv4(), testName: 'Neutrophile Granulozyten', result: 3.03, unit: '1000/µl', refs: '1.50 - 7.70' },
 		{ id: uuidv4(), testName: 'Lymphozyten', result: 2.53, unit: '1000/µl', refs: '1.10 - 4.50' },
 		{ id: uuidv4(), testName: 'Monozyten', result: 0.47, unit: '1000/µl', refs: '0.10 - 0.90' },
@@ -42,7 +42,7 @@
 		{ id: uuidv4(), testName: 'Blutsenkungsgeschwindigkeit (1.Std.)', result: 11, unit: 'mm', refs: '< 20' }
 	];
 
-	let gridOptions: GridOptionsType = {
+	let gridOptions: GridOptionsType<ICList> = {
 		pk: 'id',
 		columns: [
 			{ displayName: 'SId', field: 'id', type: FieldType.Number, visible: false },
@@ -56,20 +56,30 @@
 			},
 			{ displayName: 'Unit', field: 'unit', type: FieldType.Text },
 			{ displayName: 'refs', field: 'refs', type: FieldType.Text }
-		]
+		],
+		rowBackgroundColor: (item: ICList) => {
+			return item.id === draggedId ? 'red' : '';
+		}
 	};
 
 	const flipDurationMs = 200;
 	let dragDisabled = true;
+	let draggedId = '';
 
 	function handleConsider(evt: CustomEvent<DndEvent<ICList>>) {
 		items = evt.detail.items;
+
+		if (draggedId !== evt.detail.info.id) {
+			draggedId = evt.detail.info.id;
+		}
 	}
 
 	const handleFinalize = (evt: CustomEvent<DndEvent<ICList>>) => {
 		items = evt.detail.items;
 		// Ensure dragging is stopped on drag finish
 		dragDisabled = true;
+
+		draggedId = '';
 	};
 
 	const startDrag = () => {
@@ -79,9 +89,9 @@
 		dragDisabled = true;
 	};
 
-	$: if (items) {
-		console.log(JSON.stringify(items));
-	}
+	// $: if (items) {
+	// 	console.log(JSON.stringify(items));
+	// }
 </script>
 
 <div class="flex">
@@ -103,7 +113,7 @@
 		{/each}
 	</div>
 	<div class="flex-1">
-		<Grid data={items} options={gridOptions} />
+		<Grid data={items} options={gridOptions} {draggedId} />
 	</div>
 </div>
 
@@ -116,7 +126,7 @@
 		width: 45px;
 		text-align: center;
 		vertical-align: middle;
-		border: 1px solid black;
+		border: 1px solid hsl(var(--b1));
 		margin: 1px;
 	}
 	.handle {
@@ -125,6 +135,6 @@
 		height: 100%;
 		width: 100%;
 		margin: 0;
-		background-color: #e4d8b4;
+		background-color: hsl(var(--p) / 0.6);
 	}
 </style>

@@ -28,16 +28,15 @@
 }
 
 *::-webkit-scrollbar-thumb {
-    background: hsl(var(--p) / var(--tw-bg-opacity));
+    background: hsl(var(--p));
 
     border-radius: 100vh;
-    border: 3px solid hsl(var(--b1) / var(--tw-text-opacity));
+    border: 3px solid hsl(var(--b1));
 }
 
-/* 
-    .scrollbar::-webkit-scrollbar-thumb:hover {
-        background: var(primary);
-    } */
+/* *:hover::-webkit-scrollbar-thumb {
+    border: 2px solid hsl(var(--b1) / var(--tw-text-opacity));
+} */
 
 @tailwind components;
 @tailwind utilities;

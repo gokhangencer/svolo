@@ -5,7 +5,7 @@
 	import { FieldType } from '../../types/GridColumn.type';
 	import type { GridOptionsType } from '../../types/GridOptions.type';
 
-	let gridOptions: GridOptionsType = {
+	let gridOptions: GridOptionsType<any> = {
 		pk: 'Id',
 		columns: [
 			{ displayName: 'SId', field: 'Id', type: FieldType.Number, visible: false },

@@ -6,8 +6,9 @@
 	import TextField from '../field/textField.svelte';
 	import { FormatField } from './gridUtils';
 
-	export let options: GridOptionsType;
+	export let options: GridOptionsType<any>;
 	export let data: any[];
+	export let draggedId: string | undefined = undefined;
 
 	let tableRef: HTMLElement;
 	let visibleColumns: GridColumnType[];
@@ -179,6 +180,29 @@
 		}
 	}
 
+	function getDraggedBgColor(item: any): string {
+		if (item[options.pk] === draggedId) {
+			return 'draggedTh';
+		}
+
+		return '';
+	}
+
+	function getRowStyleForDragged(item: any): string {
+		if (item[options.pk] === draggedId) {
+			return 'draggedRow';
+		}
+
+		return '';
+	}
+
+	function getRowBgColor(item: any): string {
+		let bgColor = options.rowBackgroundColor ? options.rowBackgroundColor(item) : '';
+		bgColor = bgColor !== '' ? 'bg-[' + bgColor + ']' : '';
+		console.log(bgColor);
+		return bgColor;
+	}
+
 	$: visibleColumns = options.columns.filter((f) => f.visible !== false);
 	// $: console.log('lastRowIndex:', lastRowIndex);
 	// $: console.log('lastColIndex:', lastColIndex);
@@ -205,10 +229,10 @@
 		</thead>
 		<tbody>
 			{#each data as row, rowindex}
-				<tr>
-					<th>{rowindex + 1}</th>
+				<tr class={getRowStyleForDragged(row)}>
+					<th class={getDraggedBgColor(row)}>{rowindex + 1}</th>
 					{#each visibleColumns as column, colindex}
-						<td class="p-0 {column.cssClass}" tabindex="-1">
+						<td class="p-0 {column.cssClass} " tabindex="-1">
 							{#if editing && rowindex + 1 === lastRowIndex && colindex + 1 === lastColIndex}
 								<div class="w-full p-0 m-0">
 									{#if column.type === FieldType.Text}
@@ -253,5 +277,13 @@
 		text-overflow: ellipsis;
 		padding-left: 3px;
 		padding-right: 3px;
+	}
+
+	.draggedRow {
+		border: 2px solid hsl(var(--p) / 0.6);
+	}
+
+	.draggedTh {
+		background-color: hsl(var(--p) / 0.6);
 	}
 </style>
