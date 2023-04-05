@@ -8,7 +8,7 @@
 	import { onMount } from 'svelte';
 	import './styles.css';
 
-	let theme = 'retro',
+	let theme = 'light',
 		confirmOpenned = false,
 		loginOpenned = false,
 		drawerOpenned = false;
@@ -172,26 +172,6 @@
 					</li>
 					<li>
 						<a href="/openai" on:click={() => (drawerOpenned = false)}>OpenAI</a>
-					</li>
-					<li>
-						<a
-							href={'#'}
-							on:click={() => {
-								drawerOpenned = false;
-								loginOpenned = true;
-							}}
-							>Login Form
-						</a>
-					</li>
-					<li>
-						<a
-							href={'#'}
-							on:click={() => {
-								drawerOpenned = false;
-								confirmOpenned = true;
-							}}
-							>Confirm Modal
-						</a>
 					</li>
 				</div>
 			</div>
