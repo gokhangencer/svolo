@@ -16,7 +16,7 @@
 				field: 'Salary',
 				type: FieldType.Float,
 				numberFormat: DefaultNumberFormat,
-				cssClass: 'text-right'
+				cssClass: 'text-right pr-4'
 			},
 			{ displayName: 'Company', field: 'Company', type: FieldType.Text },
 			{ displayName: 'Country', field: 'Location', type: FieldType.Text },

@@ -208,7 +208,7 @@
 	// $: console.log('lastColIndex:', lastColIndex);
 
 	$: if (editing) {
-		dispatchEvent('editChanged');
+		//dispatchEvent('editChanged');
 	}
 </script>
 

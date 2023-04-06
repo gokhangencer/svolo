@@ -6,6 +6,7 @@
 	import { v4 as uuidv4 } from 'uuid';
 	import { FieldType } from '../../../types/GridColumn.type';
 	import type { GridOptionsType } from '../../../types/GridOptions.type';
+	import { browser } from '$app/environment';
 
 	interface ICList {
 		id: string;
@@ -14,6 +15,7 @@
 		unit: string;
 		refs: string;
 	}
+
 	let items: ICList[] = [
 		{ id: uuidv4(), testName: 'Großes Blutbild i. EDTA-Blut', result: 0, unit: '', refs: '' },
 		{ id: uuidv4(), testName: 'Leukozyten', result: 6.2, unit: '1000/µl', refs: '3.9 - 10.2' },
@@ -42,17 +44,29 @@
 		{ id: uuidv4(), testName: 'Blutsenkungsgeschwindigkeit (1.Std.)', result: 11, unit: 'mm', refs: '< 20' }
 	];
 
+	items = browser
+		? !localStorage.getItem('_sv_zitems')
+			? items
+			: JSON.parse(localStorage.getItem('_sv_zitems') ?? '') ?? items
+		: items;
+
 	let gridOptions: GridOptionsType<ICList> = {
 		pk: 'id',
 		columns: [
 			{ displayName: 'SId', field: 'id', type: FieldType.Number, visible: false },
-			{ displayName: 'Test Name', field: 'testName', type: FieldType.Text, required: true },
+			{
+				displayName: 'Test Name',
+				field: 'testName',
+				type: FieldType.Text,
+				required: true,
+				cssClass: '!max-w-[200px]'
+			},
 			{
 				displayName: 'Result',
 				field: 'result',
 				type: FieldType.Float,
 				numberFormat: DefaultNumberFormat,
-				cssClass: 'text-right'
+				cssClass: 'text-right !pr-4'
 			},
 			{ displayName: 'Unit', field: 'unit', type: FieldType.Text },
 			{ displayName: 'refs', field: 'refs', type: FieldType.Text }
@@ -80,6 +94,7 @@
 		dragDisabled = true;
 
 		draggedId = '';
+		localStorage.setItem('_sv_zitems', JSON.stringify(items));
 	};
 
 	const startDrag = () => {
@@ -96,7 +111,7 @@
 
 <div class="flex">
 	<div
-		class="w-[50px] pt-[34px]"
+		class="w-[50px] pt-[35px]"
 		use:dndzone={{ items, dragDisabled, flipDurationMs }}
 		on:consider={handleConsider}
 		on:finalize={handleFinalize}>
@@ -122,7 +137,7 @@
 		position: relative;
 		display: flex;
 		align-items: center;
-		height: 36px;
+		height: 35px;
 		width: 45px;
 		text-align: center;
 		vertical-align: middle;
