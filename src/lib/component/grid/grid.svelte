@@ -5,6 +5,9 @@
 	import NumberField from '../field/numberField.svelte';
 	import TextField from '../field/textField.svelte';
 	import { FormatField } from './gridUtils';
+	import { createEventDispatcher } from 'svelte';
+
+	const dispatch = createEventDispatcher();
 
 	export let options: GridOptionsType<any>;
 	export let data: any[];
@@ -207,9 +210,7 @@
 	// $: console.log('lastRowIndex:', lastRowIndex);
 	// $: console.log('lastColIndex:', lastColIndex);
 
-	$: if (editing) {
-		//dispatchEvent('editChanged');
-	}
+	$: editing, dispatch('editChanged', editing);
 </script>
 
 <svelte:window on:keydown={handleTrackShift} on:keyup={handleTrackShift} />

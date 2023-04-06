@@ -104,6 +104,12 @@
 		dragDisabled = true;
 	};
 
+	function handleEditChange(ev: CustomEvent<any>) {
+		if ((ev.detail as boolean) === false) {
+			localStorage.setItem('_sv_zitems', JSON.stringify(items));
+		}
+	}
+
 	// $: if (items) {
 	// 	console.log(JSON.stringify(items));
 	// }
@@ -128,7 +134,7 @@
 		{/each}
 	</div>
 	<div class="flex-1">
-		<Grid data={items} options={gridOptions} {draggedId} />
+		<Grid data={items} options={gridOptions} {draggedId} on:editChanged={handleEditChange} />
 	</div>
 </div>
 
