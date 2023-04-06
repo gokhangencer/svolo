@@ -206,6 +206,10 @@
 	$: visibleColumns = options.columns.filter((f) => f.visible !== false);
 	// $: console.log('lastRowIndex:', lastRowIndex);
 	// $: console.log('lastColIndex:', lastColIndex);
+
+	$: if (editing) {
+		dispatchEvent('editChanged');
+	}
 </script>
 
 <svelte:window on:keydown={handleTrackShift} on:keyup={handleTrackShift} />
@@ -215,13 +219,13 @@
 <div class="overflow-x-auto">
 	<table
 		bind:this={tableRef}
-		class="table table-compact w-full"
+		class="table table-compact table-zebra w-full"
 		on:keydown={handleTableKeydown}
 		on:mousedown={handleTableMousedown}
 		on:dblclick={handleTableDblclick}>
 		<thead>
 			<tr>
-				<th />
+				<th class="!max-w-[30px]" />
 				{#each visibleColumns as column}
 					<th data-col-name={column.field}>{column.displayName}</th>
 				{/each}
@@ -230,11 +234,11 @@
 		<tbody>
 			{#each data as row, rowindex}
 				<tr class={getRowStyleForDragged(row)}>
-					<th class={getDraggedBgColor(row)}>{rowindex + 1}</th>
+					<th class="px-0 mr-2 {getDraggedBgColor(row)}">{rowindex + 1}</th>
 					{#each visibleColumns as column, colindex}
-						<td class="p-0 {column.cssClass} " tabindex="-1">
+						<td class="py-0 {column.cssClass}" tabindex="-1">
 							{#if editing && rowindex + 1 === lastRowIndex && colindex + 1 === lastColIndex}
-								<div class="w-full p-0 m-0">
+								<span class="w-full">
 									{#if column.type === FieldType.Text}
 										<TextField inline={true} bind:value={row[column.field]} required={column.required} bind:isvalid />
 									{:else if column.type === FieldType.Float}
@@ -248,7 +252,7 @@
 									{:else}
 										{FormatField(row, column)}
 									{/if}
-								</div>
+								</span>
 							{:else}
 								{FormatField(row, column)}
 							{/if}
@@ -270,7 +274,7 @@
 
 <style>
 	td:focus {
-		outline: 1px solid seagreen;
+		outline: 1px solid hsl(var(--p) / 0.9) !important;
 	}
 
 	td {
@@ -280,10 +284,10 @@
 	}
 
 	.draggedRow {
-		border: 2px solid hsl(var(--p) / 0.6);
+		border: 2px solid hsl(var(--p) / 0.6) !important;
 	}
 
 	.draggedTh {
-		background-color: hsl(var(--p) / 0.6);
+		background-color: hsl(var(--p) / 0.6) !important;
 	}
 </style>
