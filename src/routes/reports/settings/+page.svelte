@@ -7,7 +7,6 @@
 	import { FieldType } from '../../../types/GridColumn.type';
 	import type { GridOptionsType } from '../../../types/GridOptions.type';
 	import { browser } from '$app/environment';
-	import { json } from '@sveltejs/kit';
 
 	interface ICList {
 		id: string;
@@ -143,6 +142,11 @@
 	// 	console.log(JSON.stringify(items));
 	// }
 </script>
+
+<svelte:head>
+	<title>Report Settings</title>
+	<meta name="description" content="Report Settings" />
+</svelte:head>
 
 <div class="flex justify-center p-2">
 	<button class="btn btn-outline btn-wide btn-info" on:click={handlePreview}

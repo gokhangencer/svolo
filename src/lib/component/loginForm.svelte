@@ -82,7 +82,10 @@
 	}
 </script>
 
-<div class="modal" class:modal-open={isOpened} id="my-modal">
+<div
+	class="modal bg-[#b1ada3] bg-opacity-95 fixed w-full h-full flex items-center justify-center"
+	class:modal-open={isOpened}
+	id="my-modal">
 	<div class="modal-box bg-transparent w-auto">
 		<div class="selection:bg-rose-500 selection:text-white">
 			<div class="flex justify-center items-center">
@@ -179,3 +182,16 @@
 		</div>
 	</div>
 </div>
+
+<style>
+	.modal {
+		transition: opacity 0.25s ease;
+	}
+	body.modal-active {
+		overflow-x: hidden;
+		overflow-y: visible !important;
+	}
+	.opacity-95 {
+		opacity: 0.95;
+	}
+</style>
