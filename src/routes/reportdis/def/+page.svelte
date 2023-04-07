@@ -7,6 +7,7 @@
 	import { FieldType } from '../../../types/GridColumn.type';
 	import type { GridOptionsType } from '../../../types/GridOptions.type';
 	import { browser } from '$app/environment';
+	import { json } from '@sveltejs/kit';
 
 	interface ICList {
 		id: string;
@@ -110,10 +111,48 @@
 		}
 	}
 
+	async function handlePreview() {
+		type IDetail = {
+			FileName: string;
+			DataSourceAsJson: string;
+			ForceDownload: boolean;
+		};
+
+		var details: IDetail = {
+			FileName: 'ztest',
+			DataSourceAsJson: JSON.stringify({ lines: items }),
+			ForceDownload: false
+		};
+
+		let wnd = window.open('', 'wnd');
+		let reportData = encodeURIComponent(JSON.stringify(details));
+
+		var formHtml = `<form action="https://stranom.com/api/report/GeneratePDFUE" method="post">
+                            <input type="hidden" name="reportRequestObj" value="${reportData}">
+                        </form>`;
+
+		var elbody = wnd?.document.body;
+		if (elbody) {
+			elbody.innerHTML = formHtml;
+		}
+
+		wnd?.document.querySelector('form')?.submit();
+	}
+
 	// $: if (items) {
 	// 	console.log(JSON.stringify(items));
 	// }
 </script>
+
+<div class="flex justify-center p-2">
+	<button class="btn btn-outline btn-wide btn-info" on:click={handlePreview}
+		>Preview
+		<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+			<path
+				fill="currentColor"
+				d="M9 13a3 3 0 0 0 3 3a3 3 0 0 0 3-3a3 3 0 0 0-3-3a3 3 0 0 0-3 3m11 6.59V8l-6-6H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12c.45 0 .85-.15 1.19-.4l-4.43-4.43c-.8.52-1.76.83-2.76.83a5 5 0 0 1-5-5a5 5 0 0 1 5-5a5 5 0 0 1 5 5c0 1-.31 1.96-.83 2.75L20 19.59Z" /></svg>
+	</button>
+</div>
 
 <div class="flex">
 	<div
