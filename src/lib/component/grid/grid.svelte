@@ -111,12 +111,12 @@
 				ev.stopImmediatePropagation();
 			}
 			//console.log('lastRowIndex xx', lastRowIndex, ' ss:', td.innerHTML);
-		} else if (ev.key === 'F2') {
+		} else if (options.editable && ev.key === 'F2') {
 			editing = true;
-		} else if (ev.key === 'Enter') {
+		} else if (options.editable && ev.key === 'Enter') {
 			editing = !editing;
 			if (!editing) td.focus();
-		} else if (ev.key === 'Escape') {
+		} else if (options.editable && ev.key === 'Escape') {
 			editing = false;
 			td.focus();
 		}
@@ -147,7 +147,7 @@
 
 		let relatedEl = ev.target as HTMLElement;
 
-		if (relatedEl?.tagName === 'TD') {
+		if (options.editable && relatedEl?.tagName === 'TD') {
 			lastRowIndex = (relatedEl.closest('tr') as HTMLTableRowElement).rowIndex;
 			lastColIndex = (relatedEl as HTMLTableCellElement).cellIndex;
 			editing = true;
@@ -210,7 +210,7 @@
 	// $: console.log('lastRowIndex:', lastRowIndex);
 	// $: console.log('lastColIndex:', lastColIndex);
 
-	$: editing, dispatch('editChanged', editing);
+	//$: editing, dispatch('editChanged', editing);
 </script>
 
 <svelte:window on:keydown={handleTrackShift} on:keyup={handleTrackShift} />

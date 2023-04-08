@@ -62,7 +62,8 @@
 			},
 			{ displayName: 'Unit', field: 'unit', type: FieldType.Text },
 			{ displayName: 'refs', field: 'refs', type: FieldType.Text }
-		]
+		],
+		editable: false
 	};
 
 	items = browser

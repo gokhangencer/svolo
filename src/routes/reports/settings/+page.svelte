@@ -71,6 +71,7 @@
 			{ displayName: 'Unit', field: 'unit', type: FieldType.Text },
 			{ displayName: 'refs', field: 'refs', type: FieldType.Text }
 		],
+		editable: true,
 		rowBackgroundColor: (item: ICList) => {
 			return item.id === draggedId ? 'red' : '';
 		}
@@ -149,12 +150,13 @@
 </svelte:head>
 
 <div class="flex justify-center p-2">
-	<button class="btn btn-outline btn-wide btn-info" on:click={handlePreview}
-		>Preview
+	<button class="btn btn-outline btn-wide btn-info" on:click={handlePreview}>
+		Preview
 		<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
 			<path
 				fill="currentColor"
-				d="M9 13a3 3 0 0 0 3 3a3 3 0 0 0 3-3a3 3 0 0 0-3-3a3 3 0 0 0-3 3m11 6.59V8l-6-6H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12c.45 0 .85-.15 1.19-.4l-4.43-4.43c-.8.52-1.76.83-2.76.83a5 5 0 0 1-5-5a5 5 0 0 1 5-5a5 5 0 0 1 5 5c0 1-.31 1.96-.83 2.75L20 19.59Z" /></svg>
+				d="M9 13a3 3 0 0 0 3 3a3 3 0 0 0 3-3a3 3 0 0 0-3-3a3 3 0 0 0-3 3m11 6.59V8l-6-6H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12c.45 0 .85-.15 1.19-.4l-4.43-4.43c-.8.52-1.76.83-2.76.83a5 5 0 0 1-5-5a5 5 0 0 1 5-5a5 5 0 0 1 5 5c0 1-.31 1.96-.83 2.75L20 19.59Z" />
+		</svg>
 	</button>
 </div>
 
