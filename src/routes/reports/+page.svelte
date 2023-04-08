@@ -1,6 +1,10 @@
 <script lang="ts">
 	import { v4 as uuidv4 } from 'uuid';
 	import { browser } from '$app/environment';
+	import Grid from '$lib/component/grid/grid.svelte';
+	import { FieldType } from '../../types/GridColumn.type';
+	import { DefaultNumberFormat } from '$lib/utils/formatUtils';
+	import type { GridOptionsType } from '../../types/GridOptions.type';
 
 	interface ICList {
 		id: string;
@@ -37,6 +41,29 @@
 		{ id: uuidv4(), testName: 'unreife Granulozyten', result: 0.02, unit: '1000/µl', refs: '< 0.06' },
 		{ id: uuidv4(), testName: 'Blutsenkungsgeschwindigkeit (1.Std.)', result: 11, unit: 'mm', refs: '< 20' }
 	];
+
+	let gridOptions: GridOptionsType<ICList> = {
+		pk: 'id',
+		columns: [
+			{ displayName: 'SId', field: 'id', type: FieldType.Number, visible: false },
+			{
+				displayName: 'Test Name',
+				field: 'testName',
+				type: FieldType.Text,
+				required: true,
+				cssClass: '!max-w-[200px]'
+			},
+			{
+				displayName: 'Result',
+				field: 'result',
+				type: FieldType.Float,
+				numberFormat: DefaultNumberFormat,
+				cssClass: 'text-right !pr-4'
+			},
+			{ displayName: 'Unit', field: 'unit', type: FieldType.Text },
+			{ displayName: 'refs', field: 'refs', type: FieldType.Text }
+		]
+	};
 
 	items = browser
 		? !localStorage.getItem('_sv_zitems')
@@ -78,7 +105,7 @@
 	<meta name="description" content="Reports" />
 </svelte:head>
 
-<div class="flex items-center justify-center h-96">
+<div class="flex justify-center p-2">
 	<button class="btn btn-outline btn-wide btn-info" on:click={handlePreview}>
 		My Results
 		<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
@@ -87,4 +114,10 @@
 				d="M9 13a3 3 0 0 0 3 3a3 3 0 0 0 3-3a3 3 0 0 0-3-3a3 3 0 0 0-3 3m11 6.59V8l-6-6H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12c.45 0 .85-.15 1.19-.4l-4.43-4.43c-.8.52-1.76.83-2.76.83a5 5 0 0 1-5-5a5 5 0 0 1 5-5a5 5 0 0 1 5 5c0 1-.31 1.96-.83 2.75L20 19.59Z" />
 		</svg>
 	</button>
+</div>
+
+<div class="flex">
+	<div class="flex-1 px-2">
+		<Grid data={items} options={gridOptions} />
+	</div>
 </div>
