@@ -210,7 +210,9 @@
 	// $: console.log('lastRowIndex:', lastRowIndex);
 	// $: console.log('lastColIndex:', lastColIndex);
 
-	//$: editing, dispatch('editChanged', editing);
+	$: editing, dispatch('editChanged', editing);
+	$: lastRowIndex, dispatch('editChanged', editing);
+	$: lastColIndex, dispatch('editChanged', editing);
 </script>
 
 <svelte:window on:keydown={handleTrackShift} on:keyup={handleTrackShift} />

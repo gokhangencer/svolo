@@ -107,9 +107,9 @@
 	};
 
 	function handleEditChange(ev: CustomEvent<any>) {
-		if ((ev.detail as boolean) === false) {
-			localStorage.setItem('_sv_zitems', JSON.stringify(items));
-		}
+		//if ((ev.detail as boolean) === false) {
+		localStorage.setItem('_sv_zitems', JSON.stringify(items));
+		//}
 	}
 
 	let wnd: Window | null;
