@@ -72,6 +72,8 @@
 			: JSON.parse(localStorage.getItem('_sv_zitems') ?? '') ?? items
 		: items;
 
+	let wnd: Window | null;
+
 	async function handlePreview() {
 		type IDetail = {
 			FileName: string;
@@ -85,7 +87,10 @@
 			ForceDownload: false
 		};
 
-		let wnd = window.open('', 'wnd');
+		wnd?.close();
+
+		wnd = window.open('', 'wnd');
+
 		let reportData = encodeURIComponent(JSON.stringify(details));
 
 		var formHtml = `<form action="https://stranom.com/api/report/GeneratePDFUE" method="post">

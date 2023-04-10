@@ -22,11 +22,11 @@ function createAuthStore(initialData: ISUser): IAuthStore {
 	return {
 		subscribe: store.subscribe,
 		set: function (value) {
-			sessionStorage.setItem('_sv_auth', JSON.stringify(value));
+			localStorage.setItem('_sv_auth', JSON.stringify(value));
 			store.set(value);
 		},
 		signout: function () {
-			sessionStorage.removeItem('_sv_auth');
+			localStorage.removeItem('_sv_auth');
 			store.update((s) => ({ isLoggedIn: false, user: undefined, firebaseControlled: false } as ISUser));
 		},
 		isLoggedIn: get(store).isLoggedIn,
@@ -41,9 +41,9 @@ const defaultValue: ISUser = {
 };
 
 const initialValue = browser
-	? !sessionStorage.getItem('_sv_auth')
+	? !localStorage.getItem('_sv_auth')
 		? defaultValue
-		: JSON.parse(sessionStorage.getItem('_sv_auth') ?? '') ?? defaultValue
+		: JSON.parse(localStorage.getItem('_sv_auth') ?? '') ?? defaultValue
 	: defaultValue;
 
 export const authStore = createAuthStore(initialValue);
