@@ -66,7 +66,8 @@
 				field: 'result',
 				type: FieldType.Float,
 				numberFormat: DefaultNumberFormat,
-				cssClass: 'text-right !pr-4'
+				cssClass: 'text-right !pr-4',
+				visible: false
 			},
 			{ displayName: 'Unit', field: 'unit', type: FieldType.Text },
 			{ displayName: 'refs', field: 'refs', type: FieldType.Text }
@@ -111,6 +112,8 @@
 		}
 	}
 
+	let wnd: Window | null;
+
 	async function handlePreview() {
 		type IDetail = {
 			FileName: string;
@@ -124,7 +127,10 @@
 			ForceDownload: false
 		};
 
-		let wnd = window.open('', 'wnd');
+		wnd?.close();
+
+		wnd = window.open('', 'wnd');
+
 		let reportData = encodeURIComponent(JSON.stringify(details));
 
 		var formHtml = `<form action="https://stranom.com/api/report/GeneratePDFUE" method="post">
