@@ -22,7 +22,8 @@
 			{ displayName: 'Country', field: 'Location', type: FieldType.Text },
 			{ displayName: 'Last Login', field: 'LastLogin', type: FieldType.DateTime, dateFormat: DateFormats.DateTime },
 			{ displayName: 'Fav Color', field: 'FavColor', type: FieldType.List }
-		]
+		],
+		editable: true
 	};
 
 	$: console.log('grid inline demo');
