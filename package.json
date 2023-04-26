@@ -39,6 +39,7 @@
 		"firebase": "^9.19.1",
 		"gpt3-tokenizer": "^1.1.5",
 		"openai": "^3.2.1",
+		"peerjs": "^1.4.7",
 		"sse.js": "^0.6.1",
 		"svelte-dnd-action": "^0.9.22",
 		"uuid": "^9.0.0"

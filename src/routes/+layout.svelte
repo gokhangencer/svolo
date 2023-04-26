@@ -190,6 +190,9 @@
 					<li>
 						<a href="/reports" on:click={() => (drawerOpenned = false)}>Reports</a>
 					</li>
+					<li>
+						<a href="/vcall" on:click={() => (drawerOpenned = false)}>Video Chat</a>
+					</li>
 				</div>
 			</div>
 		</ul>
