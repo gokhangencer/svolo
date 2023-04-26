@@ -5,6 +5,6 @@ export const ssr = false;
 
 export const load = (() => {
 	return {
-		protected: false
+		protected: true
 	};
 }) satisfies PageLoad;
